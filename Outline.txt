@@ -1,0 +1,23 @@
+Each seller has an option of selling their item through three different types of auctions:
+
+Normal Auctions
+-Seller can set a timer between 1-7 days
+-Seller must set a floor price for the item
+-Each time a higher bid is placed, the timer increased by 10 mins
+-Each bid must be at least 5% greater than the previous bid
+
+
+Flash Auctions:
+-Realtime Auction
+-Starts when a threshold of buyers enter the room (number to be determined by the seller)
+-Timer starts with 15 seconds, 10 seconds is added each time a higher bid is placed
+-Bidders are allowed to match a bid. If auction ends with multiple bidders, the winner is randomly decided. 
+
+Gambling Auction:
+-Buyers buy a certain amount of entires into a pot
+-Buyers must specify how many entries they want to buy and the minimum percentage of the pot those entries must make up.
+	-For instace, buyer would buy $5 dollars of entries which must make up at least 25% of the pot
+-Minimum percentage of pot can never exceed 50%
+-If pot grows larger than what buyer enters, the money is pulled out of the pot. The program checks to see if any previous bets it pulled out are eligible to be put back in. 
+-Seller can specify what the miniumum amount they need to make is. If the pot doesn't grow to the amount before 7 days, the listing is deleted.
+-Winner loses all of the money they've betted and losers lose half.
