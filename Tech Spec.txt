@@ -1,0 +1,54 @@
+Objects:
+
+Auction(type of Auction)
+Bet (amountBet, desiredPotPercent) // just for the gamblingAuction
+Wheel (numSlices)
+
+Variables:
+
+timer 
+walletID
+currentBlock
+currentBid
+potPrice
+percentOfPot
+betDictionary
+
+Methods:
+
+normalAuction(startingPrice, timeOfAuction)
+  // timer counts up from zero to timeOfAuction days worth of blocks
+  // if timer reaches timeOfAuction limit, end method and take money from highest bidder's walletID (just end code if no bids)
+  // for each bid, timer decreases by 5 minutes worth of blocks and check if walletID has sufficient funds
+  // if a bid is not the first bid on an object, check that it is at least 5% greater than the current highest bid
+  // end auction
+  
+flashAuction(startingPrice, requiredBidders) **disregards players needing to be in same "room" as it works just the same if they all make bids
+  //if requiredBidders bid on the startingPrice, timer begins to count up to 20 seconds worth of blocks
+  //if you did not bid on item before timer begins, you cannot particpate in bidding after timer starts
+  // after auction begins there are only two bids you can make, a matching bid (same price as currentBid and doesn't affect the timer)
+     or raising bid (bid over 5% of currentBid and decreases time by 10 seconds of blocks)
+          // any other bid is invalid and each bid is checked for sufficient funds
+  // once time reaches 20 seconds of blocks, highest bidder pays from their given walletID
+  // if time runs out with x number of matching bids as the currentBid, then a random number between 1-x is chosen and that determines the winner of the item.
+  //end auction
+
+gamblingAuction(minPotPrice)** changed check on pot to just 50% of pot instead of 3x proportion
+  //timer starts immediatley and counts up to 1 hour worth of blocks
+  // for each bid, a bidder chooses a price they want to add to the pot (must be less than 50% of potPrice if price != 0) and what percentOfPot they want that bid to take up (also less than 50%)
+      // if the chosen percentOfPot is smaller than the price added/potPrice *100, then bid is cancelled
+      // if chosen percentOfPot is larger or equal to the price added/potPrice *100, then bid is accepted and put into a Hashmap <walletID, Bet>
+      // if a bidder's percentOfPot becomes smaller than their actual percentOfPlot (price added/potPrice *100), then their bet is removed from the HashMap
+      // once timer reaches 1 hour worth of blocks, wheel is created with num slices = betDictionary.size()
+          // each slice of the wheel is assigned one bet from the betDictionary, including the percentage that this bet takes up on the wheel
+          // wheel is "spun" by making a random number between 1-100 and winner is chosen based on the slice percentages  
+  // winner gets the item + 10% of potPrice, the seller gets 80% of potPrice, and the remaining 10% is split evenly between the losers
+  //end auction
+     
+      
+      
+  
+  
+
+
+  
