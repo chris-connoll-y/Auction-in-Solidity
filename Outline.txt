@@ -1,23 +1,45 @@
-Each seller has an option of selling their item through three different types of auctions:
+When a seller lists an item for auction, they can create 1 of 3 different auctions.
 
-Normal Auctions
--Seller can set a timer between 1-7 days
--Seller must set a floor price for the item
--Each time a higher bid is placed, the timer increased by 10 mins
--Each bid must be at least 5% greater than the previous bid
+1. Normal Auction
+	A normal auciton is the most basic form of auctioning. Here's how it works:
+		Pre-auction seller actions:
+			-Seller can set a timer between 1-7 days; cannot set part of a days like 2 days and 2 hours.
+			-Seller sets a floor price for the item; if the bid doesn't reach this amount by the end of the time limit, the listing is cancelled
+		When auction goes live:
+			-Timer starts at seller's set time and begins counting down
+			-Each time the bid is raised, the timer increases by 5 minutes
+			-Each bid must be at least 5% greater than the previous bid
+			-When timer hits zero, only highest bidder pays their bid and gets the item being sold
 
 
-Flash Auctions:
--Realtime Auction
--Starts when a threshold of buyers enter the room (number to be determined by the seller)
--Timer starts with 15 seconds, 10 seconds is added each time a higher bid is placed
--Bidders are allowed to match a bid. If auction ends with multiple bidders, the winner is randomly decided. 
+2. Flash Auction
+	A flash auction is a realtime auction where all bidders must be present in the "room" throughout the entire auction. Here's how it works:
+		Pre-auction seller actions:
+			-Seller sets a starting bid
+			-All bidders who join the "room" must place the starting bid amount
+			-Auction starts when a threshold of buyers enter the room that is determined by the seller
+		When auction goes live:
+			-Timer starts with 20 seconds, 10 seconds is added each time a higher bid is placed
+			-Bid must be raised by at least 5% of the last bid
+			-Bidders are allowed to match a bid. Matching a bid does not increase time on timer. If auction ends with multiple top bidders, the winner is randomly decided.
+			-Only the winner pays their bid and gets the item being sold
 
-Gambling Auction:
--Buyers buy a certain amount of entires into a pot
--Buyers must specify how many entries they want to buy and the minimum percentage of the pot those entries must make up.
-	-For instace, buyer would buy $5 dollars of entries which must make up at least 25% of the pot
--Minimum percentage of pot can never exceed 50%
--If pot grows larger than what buyer enters, the money is pulled out of the pot. The program checks to see if any previous bets it pulled out are eligible to be put back in. 
--Seller can specify what the miniumum amount they need to make is. If the pot doesn't grow to the amount before 7 days, the listing is deleted.
--Winner loses all of the money they've betted and losers lose half.
+3. Gambling Auction
+	A gambling auction is available for the adrenaline junkies like Kevin. Here's how it works:
+		Pre-auction seller actions:
+			-Timer is set by seller for 5 mins, an hour, or a day (nothing in between)
+			-Seller can specify what the miniumum amount the pot needs to reach. If the pot doesn't grow to the amount before timer hits zero, the listing is deleted.
+		When auction goes live:
+			-Buyers buy a certain amount of entires into a pot. 
+			-Buyers must specify how many entries they want to buy and the minimum percentage of the pot those entries must make up.
+				-For instance, a buyer might buy $5 dollars of entries which they set to make up at least 25% of the pot; 
+			-If pot grows larger enough to where the bidders percentage of pot is below their set min, the money is pulled out of the pot. The program checks to see if any previous bets it pulled out are eligible to be put back in.
+				-In the example of the $5 person with a minimum of 25%, if the pot hits $20, their entry will be taken out automatically.
+			-The percentage of a bidder's share in the pot can never exceed 50% or 3x the proportion of people they make up 
+				-For instance, if there's 10 bidders, each bidder makes up 10% of the people; thus, nobody can make up more than 30% of the pot
+				-If there's two people, neither can put more than 50%. If one puts $5 and the other puts $3, the $5 bet will get $2 refunded and the pot will be $6.
+				-If anyone has more than 50% or 3x the proporiton of people they make up, when the wheel spins, the excess is automatically taken out of the pot
+			-When the timer ends, a digital "wheel" is spun. The percentage of the wheel each bidder takes up is proportional to their share in the pot
+			-Winner loses all of the money they've betted, and losers lose 50%.
+			
+
