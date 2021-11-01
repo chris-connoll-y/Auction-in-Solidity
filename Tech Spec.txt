@@ -1,23 +1,14 @@
 Objects:
 
 Auction(type of Auction)
-Bet (amountBet, desiredPotPercent) // just for the gamblingAuction
-Wheel (numSlices)
-
-Variables:
-
-timer 
-walletID
-currentBlock
-currentBid
-potPrice
-percentOfPot
-betDictionary
-
-Methods:
-
-normalAuction(startingPrice, timeOfAuction)
-  // timer counts up from zero to timeOfAuction days worth of blocks
+	variables:
+		timer 
+		walletID
+		currentBlock
+		currentBid
+	Methods:
+	normalAuction(startingPrice, timeOfAuction)
+  	// timer counts up from zero to timeOfAuction days worth of blocks
   // if timer reaches timeOfAuction limit, end method and take money from highest bidder's walletID (just end code if no bids)
   // for each bid, timer decreases by 5 minutes worth of blocks and check if walletID has sufficient funds (not a priority)
   // if a bid is not the first bid on an object, check that it is at least 5% greater than the current highest bid
@@ -43,6 +34,28 @@ gamblingAuction(minPotPrice)** changed check on pot to just 50% of pot instead o
           // wheel is "spun" by making a random number between 1-100 and winner is chosen based on the slice percentages (not a priority; could choose winner like flash auction if multiple matching bids are the last ones standing)
   // winner gets the item + 10% of potPrice, the seller gets 80% of potPrice, and the remaining 10% is split evenly between the losers
   //end auction
+
+		
+		
+Bet (amountBet, desiredPotPercent) // just for the gamblingAuction
+	variables: 
+		potPrice
+		percentOfPot
+		betDictionary
+	addBet()
+		// adds bet to betDictionary
+	getDict()
+		// gets betDictionary
+Wheel (numSlices)
+	Variables:
+		potPrice
+		percentOfPot
+		betDictionary
+	setPercentages()
+		// sets up wheel with correct percentages of better's percent of pot
+	findWinner()
+		// determines winner from percentage wheel 
+
      
       
       
