@@ -1,7 +1,7 @@
 public static void main(String [] args)
 	{
 		flashAuction helloThere = new flashAuction(123,2); 
-		System.out.println(helloThere.timeOfAuctioninMilliseconds); 
+		
 		Wallet person1 = new Wallet("abc",50); 
 		Wallet person2 = new Wallet("abd",80); 
 		Wallet person3 = new Wallet("abe", 100); 
