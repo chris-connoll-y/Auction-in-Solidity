@@ -67,8 +67,7 @@ contract SolidityAuction{
     function transferFrom() external payable{
         nft.safeTransferFrom(address(this), highestBidder, nftId);
         // creator.transfer(getFinalBid()); 
-        emit Win(highestBidder, getFinalBid()); 
-        
+        emit Win(highestBidder, getFinalBid());  
     }
     
     function getFinalBid() auctionOver public view
