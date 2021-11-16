@@ -1,0 +1,79 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7.0 <0.9.0;
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+
+contract SolidityAuction{
+    
+    address payable public creator;
+    uint256 startingTime;
+    uint256 startingPrice; 
+    int256 timeOfAuctionInMilliseconds; 
+    uint256 currentBid; 
+    address payable public highestBidder; 
+    IERC721 public nft; 
+    uint public nftId; 
+    
+
+   constructor(uint256 startingPrice1, int256 timeOfAuctionInMinutes) {
+        require(timeOfAuctionInMinutes >0); 
+        creator = payable(msg.sender); 
+        startingPrice = startingPrice1; 
+        timeOfAuctionInMilliseconds = timeOfAuctionInMinutes*60000;
+        startingTime = block.timestamp; 
+    }
+    
+    function setNFT(address _nft, uint _nftID) public
+    {
+        nft = IERC721(_nft); 
+        nftId = _nftID; 
+    }
+    
+    event Win(address Winner, uint256 value); 
+    
+    // modifier timeRunning(){
+    //     require(block.timestamp < timeOfAuctionInMilliseconds + startingTime); 
+    //     _;
+    // }
+    
+    modifier auctionOver(){
+        require(int256(block.timestamp) > timeOfAuctionInMilliseconds + int256(startingTime), "Auction Not Over"); 
+        _;
+    }
+    
+    modifier hasMoney(uint256 amount){
+        require(payable(msg.sender).balance >= amount, "Non enough $$");
+        _; 
+    }
+    
+    function addBid(uint amount) hasMoney(amount) public payable{
+        require(int256(block.timestamp) < timeOfAuctionInMilliseconds + int256(startingTime), "Auction Expired"); 
+        
+        if(currentBid == 0){
+            currentBid = amount;
+            highestBidder = payable(msg.sender);
+        }
+        else{
+            if(amount >= (currentBid + (currentBid/20))){ // make sure new bid is 5% more than the previous
+                currentBid = amount;
+                highestBidder = payable(msg.sender);
+            }
+            
+        }
+        timeOfAuctionInMilliseconds -= 300000; // subtract 5 minutes after a new bid is added
+    }
+    
+    
+    function transferFrom() external payable{
+        nft.safeTransferFrom(address(this), highestBidder, nftId);
+        // creator.transfer(getFinalBid()); 
+        emit Win(highestBidder, getFinalBid()); 
+        
+    }
+    
+    function getFinalBid() auctionOver public view
+    returns(uint256 endingBid){
+        endingBid = currentBid;
+        
+    }
+    
